@@ -1,0 +1,64 @@
+.itemModal__wrapper {
+  background: #00000080;
+  background-size: cover;
+  display: flex;
+  /*max-width: 890px;*/
+  width: 100%;
+  height: 110%;
+  position: fixed;
+  /*top: -10%;
+    left: 50%;*/
+  /*translate: -50%;*/
+  /*z-index: -1;*/
+  flex-direction: column;
+  visibility: hidden;
+  /*opacity: 0;*/
+  transition: opacity 0.5s, z-index 0.5s 0s;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.itemModal__box {
+  display: flex;
+  flex-direction: column;
+  /*max-width: 430px;*/
+  width: 100%;
+  align-items: center;
+  /*max-height: 330px;*/
+  height: 100%;
+  /*padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;*/
+  background-color: white;
+  /*position: relative;*/
+  border-style: none;
+  border-width: 0;
+  border-color: black;
+  border-radius: 5px;
+  transition: visibility 0.4s;
+  justify-content: space-between; /**/
+}
+
+.itemModal__image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
+}
+
+.itemModal__title {
+  margin-top: 0;
+  align-self: flex-start;
+  padding-left: 20px;
+  font-family: "Cabinet Grotesk";
+}
+
+.itemModal__feel {
+  margin-top: 0;
+  align-self: flex-start;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}

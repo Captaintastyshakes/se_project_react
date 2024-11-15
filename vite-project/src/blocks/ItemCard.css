@@ -1,0 +1,36 @@
+.itemCard__card {
+  width: 325px;
+  height: 328px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #9b9999;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.itemCard__title {
+  /*justify-self: center;*/
+  position: relative;
+  top: 40px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: white;
+  height: 24px;
+  width: 73px;
+  text-align: center;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.itemCard__image {
+  object-fit: cover;
+  height: 100%;
+  cursor: pointer;
+}
