@@ -167,6 +167,8 @@ export default function App() {
     //g2g
   }, [clothingData]);
 
+  
+
   return (
     <>
       <div className="app__page" tabIndex={0} onKeyDown={handleEscPress}>
