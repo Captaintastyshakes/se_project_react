@@ -16,7 +16,7 @@ The app now also utilizes routing to take you to different, "views," and a conte
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
 
--git@github.com:Captaintastyshakes/se_project_express.git
+-[git@github.com:Captaintastyshakes/se_project_express.git](https://github.com/Captaintastyshakes/se_project_express.git)
 
 This is my github link to the code I wrote for project 13, as in the backend.
 If you run this on your machine all you should need to do, in terminal, is 'npm run dev' to initialize the server on your machine. (After you install the requirements, of course.)
