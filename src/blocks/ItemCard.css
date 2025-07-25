@@ -1,0 +1,88 @@
+.itemCard__card {
+  width: 325px;
+  height: 328px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #9b9999;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.itemCard__title {
+  position: relative;
+  top: 40px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: white;
+  height: 24px;
+  width: 73px;
+  text-align: center;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.itemCard__image {
+  object-fit: cover;
+  height: 100%;
+  cursor: pointer;
+}
+
+.itemCard__delete-button {
+  height: 16px;
+  width: 16px;
+  position: relative;
+  right: 14px;
+  top: 45px;
+  z-index: 1;
+  align-self: end;
+  border: none;
+  border-width: 0;
+  border-style: solid;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  opacity: 100%;
+  transition: opacity, 0.7s;
+}
+
+.itemCard__delete-button:hover {
+  opacity: 40%;
+}
+
+/**/
+.itemCard__like-button {
+  width: 21px;
+  height: 18px;
+  transition: opacity 1s;
+  align-self: center;
+  opacity: 100%;
+  margin-right: 30px;
+  cursor: pointer;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 25px;
+  padding-right: 0;
+  border: none;
+  background: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  right: 0;
+}
+
+.itemCard__like-button:hover {
+  opacity: 50%;
+}
+
+.itemCard__like-button_type_liked {
+}
+.itemCard__like-button_type_unliked {
+}

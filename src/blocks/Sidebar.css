@@ -1,0 +1,13 @@
+.sidebar__wrapper {
+  max-width: 15%;
+  display: flex;
+  flex-direction: row;
+  max-width: 250px;
+  column-gap: 10px;
+}
+
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}

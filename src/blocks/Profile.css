@@ -1,0 +1,6 @@
+.profile__wrapper {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  padding-left: 1%;
+}

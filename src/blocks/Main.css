@@ -1,0 +1,30 @@
+.main__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  width: 100%;
+}
+
+.main__cardList-wrapper {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  justify-items: flex-start;
+  padding: 0;
+  row-gap: 10px;
+}
+
+.main__cardList-header {
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
+}
+
+@media screen and (max-width: 1400px) {
+  .main__cardList-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

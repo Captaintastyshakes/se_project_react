@@ -1,0 +1,98 @@
+.modalForm_type_add-clothes {
+  justify-content: flex-start;
+  row-gap: 40px;
+  max-width: 496px;
+  height: 436px;
+  align-items: flex-start;
+  padding-left: 20px;
+}
+
+.modalForm__title {
+  text-align: end;
+  padding: 0;
+  padding-top: 10px;
+  margin: 0;
+}
+
+.modalForm__label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 8px;
+}
+
+.modalForm__input {
+  border-width: 1px;
+  border-color: black;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  width: 90%;
+}
+
+.modalForm__radio-wrapper {
+  display: flex;
+  flex-direction: column;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.modalForm__label_type_radio-button {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  padding: 0;
+}
+
+.modalForm__radio-button {
+  opacity: 100%;
+  transition: opacity, 0.5s;
+}
+
+.modalForm__radio-button:hover {
+  opacity: 60%;
+}
+
+.modalForm__submit {
+  color: white;
+  background-color: rgba(0, 0, 0, 1);
+  border-width: 0;
+  border-color: black;
+  border-style: solid;
+  height: 36px;
+  width: 124px;
+  border-radius: 4px;
+  opacity: 100%;
+  transition: opacity 0.5s;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modalForm__submit:hover {
+  opacity: 60%;
+}
+
+.modalForm__submit:disabled {
+  opacity: 20%;
+}
+
+.modalForm_type_signin {
+  text-align: start;
+  align-items: center;
+  padding-left: 15px;
+  row-gap: 15px;
+}
+
+.modalForm_type_change-profile {
+  text-align: start;
+  align-items: center;
+  padding-left: 15px;
+  row-gap: 15px;
+}
+
+.modalForm_type_signup {
+  text-align: start;
+  align-items: center;
+  padding-left: 15px;
+  row-gap: 15px;
+}
