@@ -7,10 +7,15 @@ export default function Profile({
   onClick,
   isLoggedIn,
   onCardLike,
+  handleChangeProfile,
+  handleLogout,
 }) {
   return (
     <div className="profile__wrapper">
-      <Sidebar />
+      <Sidebar
+        handleChangeProfile={handleChangeProfile}
+        handleLogout={handleLogout}
+      />
       <ClothesSection
         items={items}
         addClick={addClick}

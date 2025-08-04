@@ -10,6 +10,9 @@ export default function ModalWithForm({
   buttonText,
   loading,
   loadingText,
+  hasAltForm,
+  formBButtonText,
+  switchToAltForm,
 }) {
   return (
     <div className="modal" onMouseDown={onMouseDown}>
@@ -23,16 +26,22 @@ export default function ModalWithForm({
       >
         <h2 className="modalForm__title">{title}</h2>
         {children}
-        {!loading && (
+        <div className="modalForm__submit-button-wrapper">
           <button className="modalForm__submit" type="submit">
-            {buttonText}
+            {loading ? loadingText : buttonText}
           </button>
-        )}
-        {loading && (
-          <button className="modalForm__submit" type="submit">
-            {loadingText}
-          </button>
-        )}
+          {hasAltForm ? (
+            <button
+              className="modalForm__submit modalForm__submit_type_inactive modalForm_submit_type_login-alt"
+              type="button"
+              onClick={switchToAltForm}
+            >
+              {formBButtonText}
+            </button>
+          ) : (
+            <></>
+          )}
+        </div>
       </form>
     </div>
   );

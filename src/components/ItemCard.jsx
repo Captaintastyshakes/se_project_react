@@ -1,5 +1,5 @@
 import React from "react";
-import { currentUserContext } from "../contexts/CurrentUserContext.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import heartFull from "../images/heartFull.svg";
 import heartEmpty from "../images/heartEmpty.svg";
 
@@ -14,7 +14,7 @@ export default function ItemCard({
   likeData,
   loggedIn,
 }) {
-  const user = React.useContext(currentUserContext);
+  const user = React.useContext(CurrentUserContext);
 
   const [likeBin, setLikeBin] = React.useState(likeData); // is it a sin to set something as a state variable and never take advantage of the hook? //edit: i almost took advantage of it- oh well.
   const [isLikedByUser, setIslikedByUser] = React.useState(false);
@@ -40,14 +40,6 @@ export default function ItemCard({
   return (
     <li className="itemCard__card" onClick={onClick}>
       <p className="itemCard__title">{name}</p>
-      <img
-        className="itemCard__image"
-        src={link}
-        alt={name}
-        weather={weather}
-        id={`${badge}`}
-        owner={owner}
-      />
       {loggedIn && (
         <button
           className="itemCard__like-button"
@@ -69,6 +61,14 @@ export default function ItemCard({
           )}
         </button>
       )}
+      <img
+        className="itemCard__image"
+        src={link}
+        alt={name}
+        weather={weather}
+        id={`${badge}`}
+        owner={owner}
+      />
     </li>
   );
 }

@@ -1,2 +1,2 @@
 import React from "react";
-export const currentTemperatureContext = React.createContext();
+export const CurrentTemperatureContext = React.createContext();

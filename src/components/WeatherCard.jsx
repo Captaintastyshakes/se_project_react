@@ -5,10 +5,10 @@ import Rainy from "../images/weathericons/Rainy.png";
 import Snowy from "../images/weathericons/Snowy.png";
 import Thunder from "../images/weathericons/Thunderstorm.png";
 import React from "react";
-import { currentTemperatureContext } from "../contexts/CurrentTemperatureUnitContext.js";
+import { CurrentTemperatureContext } from "../contexts/CurrentTemperatureUnitContext.js";
 
 export default function WeatherCard({ Temperature, weather, tempAlt }) {
-  const temp = React.useContext(currentTemperatureContext);
+  const temp = React.useContext(CurrentTemperatureContext);
 
   return (
     <div className="weatherCard__wrapper">

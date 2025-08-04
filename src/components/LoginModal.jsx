@@ -9,6 +9,8 @@ export default function RegisterModal({
   submit,
   loading,
   loadingText,
+  handleFormToggle,
+  formBButtonText,
 }) {
   const [value, setValue] = React.useState({
     email: "",
@@ -32,6 +34,11 @@ export default function RegisterModal({
     setValue({ ...value, password: evt.target.value });
   };
 
+  const switchToAltForm = () => {
+    closeClick();
+    handleFormToggle();
+  };
+
   return (
     <ModalWithForm
       onMouseDown={onMousedown}
@@ -42,6 +49,9 @@ export default function RegisterModal({
       buttonText={buttonText}
       loading={loading}
       loadingText={loadingText}
+      hasAltForm={true}
+      formBButtonText={formBButtonText}
+      switchToAltForm={switchToAltForm}
     >
       <label className="modalForm__label">
         Email

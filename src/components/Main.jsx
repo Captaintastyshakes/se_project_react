@@ -1,8 +1,8 @@
 import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
 import React from "react";
-import { currentTemperatureContext } from "../contexts/CurrentTemperatureUnitContext";
-import { currentUserContext } from "../contexts/CurrentUserContext";
+import { CurrentTemperatureContext } from "../contexts/CurrentTemperatureUnitContext";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function Main({
   Temperature,
@@ -13,9 +13,9 @@ export default function Main({
   onCardLike,
   loggedIn, //this is a top level component so I'm ok 'drilling down' the properties in this case.
 }) {
-  const temp = React.useContext(currentTemperatureContext);
+  const temp = React.useContext(CurrentTemperatureContext);
 
-  const user = React.useContext(currentUserContext);
+  const user = React.useContext(CurrentUserContext);
 
   const ownedItems = items.filter((item) => {
     return item.owner === user._id;

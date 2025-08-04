@@ -9,15 +9,15 @@ import React from "react";
 import { baseURL, dbApiUrl } from "../utils/constants.js";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Profile from "./Profile.jsx";
-import { currentTemperatureContext } from "../contexts/CurrentTemperatureUnitContext.js";
+import { CurrentTemperatureContext } from "../contexts/CurrentTemperatureUnitContext.js";
 import DeleteModal from "./DeleteModal.jsx";
 import DbApi from "../utils/dbAPI.js";
-import authorizationApi from "../utils/auth.js";
+import AuthorizationApi from "../utils/auth.js";
 import AddItemModal from "./AddItemModal.jsx";
 //new
 import RegisterModal from "./RegisterModal.jsx";
 import LoginModal from "./LoginModal.jsx";
-import { currentUserContext } from "../contexts/CurrentUserContext.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import ChangeProfileModal from "./ChangeProfileModal.jsx";
 import RouteProtector from "./RouteProtector.jsx";
 
@@ -28,7 +28,7 @@ export default function App() {
 
   const dbApi = new DbApi(dbApiUrl);
 
-  const authApi = new authorizationApi(dbApiUrl);
+  const authApi = new AuthorizationApi(dbApiUrl);
 
   //hooks
 
@@ -48,7 +48,6 @@ export default function App() {
   const [deleteModalState, setDeleteModalState] = React.useState(false);
   const [deleteData, setDeleteData] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
-  //new stuff
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [registerModalState, setRegisterModalState] = React.useState(false);
   const [token, setToken] = React.useState("");
@@ -78,7 +77,7 @@ export default function App() {
       });
   };
 
-  //mock server api
+  //server api
 
   const filterHighest = (someArray) => {
     let highest = 0;
@@ -184,18 +183,20 @@ export default function App() {
       imageUrl: url,
     };
 
-    authApi.checkToken(token);
-
+    authApi.setToken(token);
+    setIsLoading(true);
     authApi
       .postImage(newGarment)
       .then((item) => {
-        setIsLoading(true);
+        //setIsLoading(true);
         setClothingData([item, ...clothingData]);
       })
-      .catch((err) => console.log(err))
+      .then(() => {
+        closeModals();
+      })
+      .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-        closeModals();
       });
   };
 
@@ -226,7 +227,7 @@ export default function App() {
   const handleDeleteSubmit = (evt) => {
     evt.preventDefault();
     setIsLoading(true);
-    authApi.checkToken(token);
+    authApi.setToken(token);
     authApi
       .deleteImage(deleteData)
       .then(() => {
@@ -303,20 +304,24 @@ export default function App() {
         setUserData(res.approvedData);
         setIsLoggedIn(true);
         localStorage.setItem("jwt", res.token);
+        localStorage.setItem("key", data.password);
+        localStorage.setItem("moniker", data.email);
         setToken(res.token);
       })
+      .then(() => {
+        closeModals();
+      })
       .catch((err) => {
-        console.log(err);
+        console.error;
         alert("Something went wrong and we were unable to log you in. " + err);
       })
       .finally(() => {
         setIsLoading(false);
-        closeModals();
       });
-  }; //ok
+  };
 
   const processSignout = () => {
-    localStorage.removeItem("jwt");
+    localStorage.clear();
     setIsLoggedIn(false);
     setUserData({});
     setToken("");
@@ -326,28 +331,31 @@ export default function App() {
     setLoginModalState(!loginModalState);
   };
 
+  //
+
+  const autoLogin = () => {
+    const key = {
+      email: localStorage.getItem("moniker"),
+      password: localStorage.getItem("key"),
+    };
+    processSignin(key);
+  };
+
+  //
+
   React.useEffect(() => {
     if (localStorage.getItem("jwt")) {
       setToken(localStorage.getItem("jwt"));
-      authApi.checkToken(token);
-      if (token) {
-        authApi
-          .userCheck()
-          .then((success) => {
-            console.log("Token ok!");
-          })
-          .catch((err) => {
-            console.log("Token NOT ok! " + err);
-            processSignout();
-          });
+      if (localStorage.getItem("key")) {
+        autoLogin();
       }
     }
-  }, []);
+  }, []); //checking tokens and logging in automatically
 
   //dis/like stuff
 
   const handleLike = ({ id, isliked }) => {
-    authApi.checkToken(token);
+    authApi.setToken(token);
     !isliked //this variable when camelCased was causing React to complain so in this one instance I have elected to lower case it. This is not a case of negligence- any other instances that aren't camelcased are though, lol.
       ? authApi
           .addLike(id, userData)
@@ -380,7 +388,7 @@ export default function App() {
   //changing profile stuff
 
   const processProfileChange = (data) => {
-    authApi.checkToken(token);
+    authApi.setToken(token);
     setIsLoading(true);
     if (!data.avatar) {
       data.avatar = userData.avatar;
@@ -388,10 +396,12 @@ export default function App() {
     authApi
       .changeProfile(data)
       .then((updatedUser) => setUserData(updatedUser))
-      .catch((err) => console.log(err))
+      .then(() => {
+        closeModals();
+      })
+      .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-        closeModals();
       });
   };
 
@@ -400,8 +410,8 @@ export default function App() {
   };
 
   return (
-    <currentUserContext.Provider value={userData}>
-      <currentTemperatureContext.Provider
+    <CurrentUserContext.Provider value={userData}>
+      <CurrentTemperatureContext.Provider
         value={{ currentTemperatureUnit, handleCheckboxClick }}
       >
         <div className="app__page" tabIndex={0} onKeyDown={handleEscPress}>
@@ -439,6 +449,8 @@ export default function App() {
                     onClick={handleImageClick}
                     isLoggedIn={isLoggedIn}
                     onCardLike={handleLike}
+                    handleChangeProfile={toggleChangeProfileModal}
+                    handleLogout={processSignout}
                   />
                 </RouteProtector>
               }
@@ -498,25 +510,29 @@ export default function App() {
               onClick={handleBoxClick}
               onMousedown={handleModalClick}
               title="New user registration"
-              buttonText="Sign up!"
+              buttonText="Sign up"
               name="signup"
               closeClick={toggleRegisterModalState}
               submit={processRegistration}
               loading={isLoading}
               loadingText="Signing up..."
+              handleFormToggle={toggleLoginModalState}
+              formBButtonText="Log in"
             />
           )}
           {loginModalState && (
             <LoginModal
               onClick={handleBoxClick}
               onMousedown={handleModalClick}
-              title="Login"
-              buttonText="Sign in!"
+              title="Log in"
+              buttonText="Log in"
               name="signin"
               closeClick={toggleLoginModalState}
               submit={processSignin}
               loading={isLoading}
               loadingText="Logging in..."
+              handleFormToggle={toggleRegisterModalState}
+              formBButtonText="Sign up"
             />
           )}
           {changeProfileState && isLoggedIn && (
@@ -534,7 +550,7 @@ export default function App() {
           )}
           <Footer />
         </div>
-      </currentTemperatureContext.Provider>
-    </currentUserContext.Provider>
+      </CurrentTemperatureContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import ModalWithForm from "./ModalWithForm.jsx";
-import { currentUserContext } from "../contexts/CurrentUserContext.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 export default function ChangeProfileModal({
   onMousedown,
@@ -12,7 +12,7 @@ export default function ChangeProfileModal({
   loading,
   loadingText,
 }) {
-  const user = React.useContext(currentUserContext);
+  const user = React.useContext(CurrentUserContext);
   const [value, setValue] = React.useState({
     avatar: `${user.avatar}`,
     name: `${user.name}`,

@@ -1,8 +1,8 @@
 import React from "react";
-import { currentUserContext } from "../contexts/CurrentUserContext.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-export default function Sidebar() {
-  const user = React.useContext(currentUserContext);
+export default function Sidebar({ handleChangeProfile, handleLogout }) {
+  const user = React.useContext(CurrentUserContext);
 
   const defaultAvatar =
     typeof user.name == "string" && user.avatar.includes("notarealurl")
@@ -25,6 +25,22 @@ export default function Sidebar() {
       <p className="sidebar__name">
         {user.name ? user.name : "Login to see your info!"}
       </p>
+      <div className="sidebar__button-wrapper">
+        <button
+          className="sidebar__button sidebar__button_type_profile"
+          onClick={handleChangeProfile}
+          type="button"
+        >
+          Change Profile Data
+        </button>
+        <button
+          className="sidebar__button sidebar__button_type_logout"
+          onClick={handleLogout}
+          type="button"
+        >
+          Log out
+        </button>
+      </div>
     </div>
   );
 }

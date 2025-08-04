@@ -1,7 +1,7 @@
 import ItemCard from "./ItemCard.jsx";
 
 import React from "react";
-import { currentUserContext } from "../contexts/CurrentUserContext.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 export default function ClothesSection({
   addClick,
@@ -10,7 +10,7 @@ export default function ClothesSection({
   isLoggedIn,
   onCardLike,
 }) {
-  const user = React.useContext(currentUserContext);
+  const user = React.useContext(CurrentUserContext);
 
   const ownedItems = items.filter((item) => item.owner === user._id);
 

@@ -1,9 +1,9 @@
 import "../blocks/ToggleSwitch.css";
-import { currentTemperatureContext } from "../contexts/CurrentTemperatureUnitContext.js";
+import { CurrentTemperatureContext } from "../contexts/CurrentTemperatureUnitContext.js";
 import React from "react";
 
 export default function ToggleSwitch({ checked, onChange }) {
-  const temp = React.useContext(currentTemperatureContext);
+  const temp = React.useContext(CurrentTemperatureContext);
 
   return (
     <div className="toggleSwitch__wrapper">

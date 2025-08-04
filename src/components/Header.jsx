@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import ToggleSwitch from "./ToggleSwitch.jsx";
 import wtwr from "../images/wtwr°.png";
 import React from "react";
-import { currentUserContext } from "../contexts/CurrentUserContext.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 export default function Header({
   location,
@@ -20,7 +20,7 @@ export default function Header({
     day: "numeric",
   });
 
-  const user = React.useContext(currentUserContext);
+  const user = React.useContext(CurrentUserContext);
 
   const defaultAvatar =
     typeof user.name == "string" && user.avatar.includes("notarealurl")
@@ -37,23 +37,9 @@ export default function Header({
           {currentDate}, {location}
         </p>
       </div>
-      {!loginCheck && (
-        <button
-          className="header__register-button header__clothes-button"
-          onClick={registerClickHandler}
-        >
-          New? Click here!
-        </button>
-      )}
-      {loginCheck && (
-        <button
-          className="header__logout-button header__clothes-button"
-          onClick={logOut}
-        >
-          Log out
-        </button>
-      )}
+
       <div className="header__sub-wrapper">
+        <ToggleSwitch checked={check} onChange={handleChange} />
         {loginCheck && (
           <button
             className="header__clothes-button"
@@ -63,7 +49,6 @@ export default function Header({
             +Add Clothes
           </button>
         )}
-        <ToggleSwitch checked={check} onChange={handleChange} />
         {loginCheck ? (
           <button
             className="header__change-profile-button header__clothes-button"
@@ -76,23 +61,33 @@ export default function Header({
             className="header__login-button header__clothes-button"
             onClick={loginClickHandler}
           >
-            Login here!
+            Log in
           </button>
         )}
-        <NavLink className="header__link" to={loginCheck ? "/profile" : "/"}>
-          {user.avatar && !user.avatar.includes("notarealurl") ? (
-            <img
-              className="header__avatar"
-              src={user.avatar}
-              id="avatar"
-              alt="Your Avatar"
-            />
-          ) : (
-            <h1 className="header__avatar header__avatar_type_default">
-              {defaultAvatar}
-            </h1>
-          )}
-        </NavLink>
+        {!loginCheck && (
+          <button
+            className="header__register-button header__clothes-button"
+            onClick={registerClickHandler}
+          >
+            Sign up
+          </button>
+        )}
+        {loginCheck && (
+          <NavLink className="header__link" to={loginCheck ? "/profile" : "/"}>
+            {user.avatar && !user.avatar.includes("notarealurl") ? (
+              <img
+                className="header__avatar"
+                src={user.avatar}
+                id="avatar"
+                alt="Your Avatar"
+              />
+            ) : (
+              <h1 className="header__avatar header__avatar_type_default">
+                {defaultAvatar}
+              </h1>
+            )}
+          </NavLink>
+        )}
       </div>
     </header>
   );

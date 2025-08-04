@@ -62,27 +62,24 @@
   width: 21px;
   height: 18px;
   transition: opacity 1s;
-  align-self: center;
+  align-self: flex-end;
   opacity: 100%;
   margin-right: 30px;
   cursor: pointer;
   padding-left: 0;
   padding-top: 0;
-  padding-bottom: 25px;
+  padding-bottom: 25px; /**/
   padding-right: 0;
   border: none;
   background: none;
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
-  right: 0;
+  justify-self: baseline;
+  right: 15%;
+  top: 6%;
 }
 
 .itemCard__like-button:hover {
   opacity: 50%;
-}
-
-.itemCard__like-button_type_liked {
-}
-.itemCard__like-button_type_unliked {
 }

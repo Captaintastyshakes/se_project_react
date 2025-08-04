@@ -1,7 +1,7 @@
 import close from "../images/union (1).svg";
 
 import React from "react";
-import { currentUserContext } from "../contexts/CurrentUserContext.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 export default function ItemModal({
   onMouseDown,
@@ -10,7 +10,7 @@ export default function ItemModal({
   data,
   delClick,
 }) {
-  const user = React.useContext(currentUserContext);
+  const user = React.useContext(CurrentUserContext);
 
   return (
     <div className="modal" onMouseDown={onMouseDown}>

@@ -16,9 +16,9 @@ export default class Api {
   }
 
   returnFeel(temp) {
-    if (temp >= 86) {
+    if (temp >= 70) {
       return "hot";
-    } else if (temp >= 66 && temp <= 85) {
+    } else if (temp >= 50 && temp <= 69) {
       return "warm";
     } else {
       return "cold";
