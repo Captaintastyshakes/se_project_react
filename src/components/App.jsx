@@ -38,7 +38,6 @@ export default function App() {
   const [imageData, setImageData] = React.useState({});
   const [locationData, setLocationData] = React.useState("");
   const [temperature, setTemperature] = React.useState("");
-  const [newItemIndex, setNewItemIndex] = React.useState("");
   const [clothingData, setClothingData] = React.useState([]);
   const [weatherConditions, setWeatherConditions] = React.useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] =
@@ -79,16 +78,6 @@ export default function App() {
 
   //server api
 
-  const filterHighest = (someArray) => {
-    let highest = 0;
-    someArray.forEach((item) => {
-      if (item._id > highest) {
-        highest = item._id;
-      }
-    });
-    return highest;
-  };
-
   const loadClothingData = () => {
     dbApi
       .getImages()
@@ -100,7 +89,6 @@ export default function App() {
           "Warning! Loading clothing data has failed; please try again later."
         );
       });
-    setNewItemIndex(filterHighest(clothingData));
   };
 
   //this is how the app loads
@@ -177,7 +165,6 @@ export default function App() {
   const updateClothes = (newItem) => {
     const { name, radio, url } = newItem;
     const newGarment = {
-      _id: newItemIndex,
       name: name,
       weather: radio,
       imageUrl: url,
@@ -199,10 +186,6 @@ export default function App() {
         setIsLoading(false);
       });
   };
-
-  React.useEffect(() => {
-    setNewItemIndex(filterHighest(clothingData) + 1);
-  }, [clothingData]);
 
   //checkbox state handler
 
